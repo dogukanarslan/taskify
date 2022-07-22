@@ -10,6 +10,7 @@ const App = () => {
   const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newTodos = [...todos, { id: Date.now(), todo, isDone: false }];
+
     if (todo) {
       setTodos(newTodos);
       setTodo("");

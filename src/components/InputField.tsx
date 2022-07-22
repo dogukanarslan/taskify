@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import "./InputField.scss";
 
 interface InputFieldProps {
@@ -9,14 +10,23 @@ interface InputFieldProps {
 export const InputField = (props: InputFieldProps) => {
   const { todo, setTodo, handleAdd } = props;
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleChangeTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value);
   };
 
   return (
-    <form className="form" onSubmit={handleAdd}>
+    <form
+      className="form"
+      onSubmit={(e) => {
+        handleAdd(e);
+        inputRef.current?.blur();
+      }}
+    >
       <input
         className="form__input"
+        ref={inputRef}
         type="input"
         value={todo}
         placeholder="Enter a task"
