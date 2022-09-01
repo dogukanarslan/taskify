@@ -1,8 +1,10 @@
 .todos {
-  &--icon {
-    font-size: 20px;
-    &:hover {
-      opacity: 0.6;
+  &__single-todo {
+    &--icon {
+      font-size: 20px;
+      &:hover {
+        opacity: 0.6;
+      }
     }
   }
 }
