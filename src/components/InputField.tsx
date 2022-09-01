@@ -1,7 +1,7 @@
-import { useRef } from "react";
-import "./InputField.scss";
+import { useRef } from 'react';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-interface InputFieldProps {
+interface InputFieldProps extends React.HTMLAttributes<HTMLFormElement> {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
   handleAdd: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -17,24 +17,25 @@ export const InputField = (props: InputFieldProps) => {
   };
 
   return (
-    <form
-      className="form"
+    <Form
       onSubmit={(e) => {
         handleAdd(e);
         inputRef.current?.blur();
       }}
     >
-      <input
-        className="form__input"
-        ref={inputRef}
-        type="input"
-        value={todo}
-        placeholder="Enter a task"
-        onChange={handleChangeTodo}
-      />
-      <button className="form__button" type="submit">
+      <FormGroup>
+        <Label>Task Name</Label>
+        <Input
+          type="text"
+          value={todo}
+          placeholder="Enter a task"
+          onChange={handleChangeTodo}
+        />
+      </FormGroup>
+
+      <Button color="primary" type="submit">
         Add
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 };

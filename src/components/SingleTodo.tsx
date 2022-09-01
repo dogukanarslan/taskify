@@ -1,7 +1,8 @@
-import React, { FormEvent, useState } from "react";
-import { Todo } from "../model";
-import { FiDelete, FiEdit, FiCheck } from "react-icons/fi";
-
+import React, { FormEvent, useState } from 'react';
+import { Form, Input } from 'reactstrap';
+import { Todo } from '../model';
+import { FiDelete, FiEdit, FiCheck } from 'react-icons/fi';
+import './TodoList.scss';
 interface SingleTodoProps {
   todo: Todo;
   todos: Todo[];
@@ -50,43 +51,45 @@ export const SingleTodo = (props: SingleTodoProps) => {
   };
 
   return (
-    <form className="todos__single-todo" onSubmit={handleSubmit}>
-      {edit ? (
-        <input
-          className="todos__single-todo--text"
-          type="text"
-          value={todoText}
-          onChange={handleEdit}
-        />
-      ) : (
-        <span
-          className={`todos__single-todo--text ${
-            todo.isDone ? "todos__single-todo--text-done" : ""
-          }`}
-        >
-          {todo.todo}
-        </span>
-      )}
-      <div>
-        <span
-          className="todos__single-todo--icon"
-          onClick={() => handleDelete(todo.id)}
-        >
-          <FiDelete />
-        </span>
-        <span
-          className="todos__single-todo--icon"
-          onClick={() => setEdit(!edit)}
-        >
-          <FiEdit />
-        </span>
-        <span
-          className="todos__single-todo--icon"
-          onClick={() => handleDone(todo.id)}
-        >
-          <FiCheck />
-        </span>
+    <Form onSubmit={handleSubmit}>
+      <div className="d-flex justify-content-between align-items-center">
+        {edit ? (
+          <Input
+            className="w-50"
+            type="text"
+            value={todoText}
+            onChange={handleEdit}
+          />
+        ) : (
+          <div
+            className={`d-flex align-items-center ${
+              todo.isDone ? 'line-through' : ''
+            }`}
+          >
+            {todo.todo}
+          </div>
+        )}
+        <div className="d-flex">
+          <div
+            className="todos__single-todo--icon p-2 mr-1 cursor-pointer"
+            onClick={() => handleDelete(todo.id)}
+          >
+            <FiDelete />
+          </div>
+          <div
+            className="todos__single-todo--icon p-2 mr-1 cursor-pointer"
+            onClick={() => setEdit(!edit)}
+          >
+            <FiEdit />
+          </div>
+          <div
+            className="todos__single-todo--icon p-2"
+            onClick={() => handleDone(todo.id)}
+          >
+            <FiCheck />
+          </div>
+        </div>
       </div>
-    </form>
+    </Form>
   );
 };

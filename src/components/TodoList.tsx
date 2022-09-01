@@ -1,7 +1,7 @@
-import React from "react";
-import { Todo } from "../model";
-import { SingleTodo } from "./SingleTodo";
-import "./TodoList.scss";
+import React from 'react';
+import { ListGroup, ListGroupItem } from 'reactstrap';
+import { Todo } from '../model';
+import { SingleTodo } from './SingleTodo';
 
 interface TodosProps {
   todos: Todo[];
@@ -12,15 +12,12 @@ export const TodoList = (props: TodosProps) => {
   const { todos, setTodos } = props;
 
   return (
-    <div className="todos">
+    <ListGroup>
       {todos.map((todo) => (
-        <SingleTodo
-          key={todo.id}
-          todo={todo}
-          todos={todos}
-          setTodos={setTodos}
-        />
+        <ListGroupItem key={todo.id}>
+          <SingleTodo todo={todo} todos={todos} setTodos={setTodos} />
+        </ListGroupItem>
       ))}
-    </div>
+    </ListGroup>
   );
 };
