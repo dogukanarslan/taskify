@@ -83,7 +83,7 @@ export const SingleTodo = (props: SingleTodoProps) => {
             <FiEdit />
           </div>
           <div
-            className="todos__single-todo--icon p-2"
+            className="todos__single-todo--icon p-2 cursor-pointer"
             onClick={() => handleDone(todo.id)}
           >
             <FiCheck />
