@@ -1,7 +1,6 @@
-import { useRef } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-interface InputFieldProps extends React.HTMLAttributes<HTMLFormElement> {
+interface InputFieldProps {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
   handleAdd: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -10,19 +9,12 @@ interface InputFieldProps extends React.HTMLAttributes<HTMLFormElement> {
 export const InputField = (props: InputFieldProps) => {
   const { todo, setTodo, handleAdd } = props;
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
   const handleChangeTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value);
   };
 
   return (
-    <Form
-      onSubmit={(e) => {
-        handleAdd(e);
-        inputRef.current?.blur();
-      }}
-    >
+    <Form className="mb-4" onSubmit={handleAdd}>
       <FormGroup>
         <Label>Task Name</Label>
         <Input

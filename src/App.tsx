@@ -21,9 +21,8 @@ const App = () => {
   return (
     <div className="App">
       <Container>
-        <h1>Taskify</h1>
+        <h1 className="text-center">Taskify</h1>
         <InputField
-          className="mb-5"
           todo={todo}
           setTodo={setTodo}
           handleAdd={handleAdd}
