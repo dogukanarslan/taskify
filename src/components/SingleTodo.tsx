@@ -1,36 +1,29 @@
 import React, { FormEvent, useState } from 'react';
 import { Form, Input } from 'reactstrap';
-import { Todo } from '../model';
+import { connect } from 'react-redux';
+import { Dispatch } from '@reduxjs/toolkit';
+import { ITodo } from '../model';
 import { FiDelete, FiEdit, FiCheck } from 'react-icons/fi';
 import './TodoList.scss';
+import { deleteTodo, editTodo, toggleDone } from '../redux/slices/todosSlice';
 interface SingleTodoProps {
-  todo: Todo;
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  todo: ITodo;
+  todos: ITodo[];
+  dispatch: Dispatch;
 }
 
-export const SingleTodo = (props: SingleTodoProps) => {
-  const { todo, todos, setTodos } = props;
+export const SingleTodo = connect()((props: SingleTodoProps) => {
+  const { dispatch, todo } = props;
 
   const [todoText, setTodoText] = useState<string>(todo.todo);
   const [edit, setEdit] = useState<boolean>(false);
 
   const handleDelete = (id: number) => {
-    const newTodos = todos.filter((todo) => todo.id !== id);
-
-    setTodos(newTodos);
+    dispatch(deleteTodo(id));
   };
 
   const handleDone = (id: number) => {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, isDone: !todo.isDone };
-      }
-
-      return todo;
-    });
-
-    setTodos(newTodos);
+    dispatch(toggleDone(id));
   };
 
   const handleEdit = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,14 +32,8 @@ export const SingleTodo = (props: SingleTodoProps) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newTodos = todos.map((item) => {
-      if (todo.id === item.id) {
-        return { ...todo, todo: todoText };
-      }
+    dispatch(editTodo({ id: todo.id, todoText }));
 
-      return item;
-    });
-    setTodos(newTodos);
     setEdit(false);
   };
 
@@ -92,4 +79,4 @@ export const SingleTodo = (props: SingleTodoProps) => {
       </div>
     </Form>
   );
-};
+});
