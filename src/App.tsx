@@ -17,12 +17,13 @@ const App = (props: AppProps) => {
   const { dispatch, todos } = props;
 
   const [todo, setTodo] = useState('');
+  const [priority, setPriority] = useState('');
 
   const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (todo) {
-      dispatch(addTodo({ id: Date.now(), todo, isDone: false }));
+      dispatch(addTodo({ id: Date.now(), todo, isDone: false, priority }));
       setTodo('');
     }
   };
@@ -31,7 +32,13 @@ const App = (props: AppProps) => {
     <div className="App">
       <Container>
         <h1 className="text-center">Taskify</h1>
-        <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+        <InputField
+          todo={todo}
+          setTodo={setTodo}
+          priority={priority}
+          setPriority={setPriority}
+          handleAdd={handleAdd}
+        />
         <TodoList todos={todos.todos} />
       </Container>
     </div>

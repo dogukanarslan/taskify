@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react';
-import { Form, Input } from 'reactstrap';
+import { Badge, Form, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Dispatch } from '@reduxjs/toolkit';
 import { ITodo } from '../model';
@@ -54,6 +54,18 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
             }`}
           >
             {todo.todo}
+            <Badge
+              className="ml-2"
+              color={
+                todo.priority === 'high'
+                  ? 'danger'
+                  : todo.priority === 'medium'
+                  ? 'warning'
+                  : 'success'
+              }
+            >
+              {todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
+            </Badge>
           </div>
         )}
         <div className="d-flex">
