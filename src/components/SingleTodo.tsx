@@ -32,7 +32,7 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(editTodo({ id: todo.id, todoText }));
+    dispatch(editTodo({ id: todo.id, text: todoText }));
 
     setEdit(false);
   };
@@ -42,7 +42,7 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
       <div className="d-flex justify-content-between align-items-center">
         {edit ? (
           <Input
-            className="w-50"
+            className="w-25"
             type="text"
             value={todoText}
             onChange={handleEdit}
