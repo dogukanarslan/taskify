@@ -1,15 +1,18 @@
+import { Dispatch } from '@reduxjs/toolkit';
+import { useState } from 'react';
+import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { addTodo } from '../redux/slices/todosSlice';
 
 interface InputFieldProps {
-  todo: string;
-  priority: string;
-  setPriority: React.Dispatch<React.SetStateAction<string>>;
-  setTodo: React.Dispatch<React.SetStateAction<string>>;
-  handleAdd: (e: React.FormEvent<HTMLFormElement>) => void;
+  dispatch: Dispatch;
 }
 
-export const InputField = (props: InputFieldProps) => {
-  const { todo, setTodo, priority, setPriority, handleAdd } = props;
+export const InputField = connect()((props: InputFieldProps) => {
+  const { dispatch } = props;
+
+  const [todo, setTodo] = useState('');
+  const [priority, setPriority] = useState('');
 
   const handleChangeTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value);
@@ -17,6 +20,18 @@ export const InputField = (props: InputFieldProps) => {
 
   const handleChangePriority = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPriority(e.target.value);
+  };
+
+  const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!todo) {
+      return;
+    }
+
+    setTodo('');
+    setPriority('');
+    dispatch(addTodo({ id: Date.now(), isDone: false, todo, priority }));
   };
 
   return (
@@ -48,4 +63,4 @@ export const InputField = (props: InputFieldProps) => {
       </Button>
     </Form>
   );
-};
+});

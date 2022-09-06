@@ -1,13 +1,20 @@
-import React from 'react';
+import { connect } from 'react-redux';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import { ITodo } from '../model';
+import { RootState } from '../redux/store';
 import { SingleTodo } from './SingleTodo';
 
 interface TodosProps {
   todos: ITodo[];
 }
 
-export const TodoList = (props: TodosProps) => {
+const mapStateToProps = (state: RootState) => {
+  const { todos } = state;
+
+  return { todos: todos.todos };
+};
+
+export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
   const { todos } = props;
 
   return (
@@ -19,4 +26,4 @@ export const TodoList = (props: TodosProps) => {
       ))}
     </ListGroup>
   );
-};
+});
