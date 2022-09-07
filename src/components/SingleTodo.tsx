@@ -42,7 +42,7 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
       <div className="d-flex justify-content-between align-items-center">
         {edit ? (
           <Input
-            className="w-25"
+            className="w-50"
             type="text"
             value={todoText}
             onChange={handleEdit}

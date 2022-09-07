@@ -13,6 +13,10 @@ export const InputField = connect()((props: InputFieldProps) => {
 
   const [todo, setTodo] = useState('');
   const [priority, setPriority] = useState('');
+  const [errors, setErrors] = useState({
+    todo: '',
+    priority: '',
+  });
 
   const handleChangeTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodo(e.target.value);
@@ -22,16 +26,34 @@ export const InputField = connect()((props: InputFieldProps) => {
     setPriority(e.target.value);
   };
 
+  const validate = () => {
+    let todoError = '',
+      priorityError = '';
+
+    if (!todo) {
+      todoError = 'Todo is required.';
+    }
+
+    if (!priority) {
+      priorityError = 'Priority is required.';
+    }
+
+    setErrors({ todo: todoError, priority: priorityError });
+    if (todoError || priorityError) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!todo) {
-      return;
+    if (validate()) {
+      setTodo('');
+      setPriority('');
+      dispatch(addTodo({ id: Date.now(), isDone: false, todo, priority }));
     }
-
-    setTodo('');
-    setPriority('');
-    dispatch(addTodo({ id: Date.now(), isDone: false, todo, priority }));
   };
 
   return (
@@ -44,6 +66,7 @@ export const InputField = connect()((props: InputFieldProps) => {
           placeholder="Enter a task"
           onChange={handleChangeTodo}
         />
+        {errors.todo && <p className="text-danger">{errors.todo}</p>}
       </FormGroup>
 
       <FormGroup>
@@ -56,6 +79,7 @@ export const InputField = connect()((props: InputFieldProps) => {
           <option value="medium">Medium</option>
           <option value="low">Low</option>
         </Input>
+        {errors.priority && <p className="text-danger">{errors.priority}</p>}
       </FormGroup>
 
       <Button color="primary" type="submit">
