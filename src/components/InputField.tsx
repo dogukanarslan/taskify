@@ -31,7 +31,7 @@ export const InputField = connect()((props: InputFieldProps) => {
       priorityError = '';
 
     if (!todo) {
-      todoError = 'Todo is required.';
+      todoError = 'Task name is required.';
     }
 
     if (!priority) {
