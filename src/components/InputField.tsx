@@ -2,6 +2,7 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { addToast } from '../redux/slices/toastsSlice';
 import { addTodo } from '../redux/slices/todosSlice';
 
 interface InputFieldProps {
@@ -53,6 +54,7 @@ export const InputField = connect()((props: InputFieldProps) => {
       setTodo('');
       setPriority('');
       dispatch(addTodo({ id: Date.now(), isDone: false, todo, priority }));
+      dispatch(addToast({ header: 'New Task', body: `${todo}` }));
     }
   };
 
