@@ -12,6 +12,7 @@ const toastsSlice = createSlice({
         id: Math.random(),
         header: action.payload.header,
         body: action.payload.body,
+        type: action.payload.type,
       });
     },
     deleteToast: (state, action) => {

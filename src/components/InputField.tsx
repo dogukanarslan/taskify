@@ -54,7 +54,9 @@ export const InputField = connect()((props: InputFieldProps) => {
       setTodo('');
       setPriority('');
       dispatch(addTodo({ id: Date.now(), isDone: false, todo, priority }));
-      dispatch(addToast({ header: 'New Task', body: `${todo}` }));
+      dispatch(
+        addToast({ header: 'New Task', body: `${todo}`, type: 'success' })
+      );
     }
   };
 

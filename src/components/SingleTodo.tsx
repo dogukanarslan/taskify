@@ -6,6 +6,8 @@ import { ITodo } from '../model';
 import { FiDelete, FiEdit, FiCheck } from 'react-icons/fi';
 import './TodoList.scss';
 import { deleteTodo, editTodo, toggleDone } from '../redux/slices/todosSlice';
+import { addToast } from '../redux/slices/toastsSlice';
+
 interface SingleTodoProps {
   todo: ITodo;
   todos: ITodo[];
@@ -20,6 +22,13 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
 
   const handleDelete = (id: number) => {
     dispatch(deleteTodo(id));
+    dispatch(
+      addToast({
+        header: 'Delete Task',
+        body: 'Task deleted!',
+        type: 'danger',
+      })
+    );
   };
 
   const handleDone = (id: number) => {
