@@ -28,7 +28,7 @@ export const Toast = connect()((props: ToastProps) => {
 
   return (
     <div
-      className="position-fixed m-2"
+      className="position-fixed p-2"
       style={{ top: 0, right: 0, width: 350 }}
     >
       {toasts.map((toast) => (
