@@ -57,12 +57,10 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
             onChange={handleEdit}
           />
         ) : (
-          <div
-            className={`d-flex align-items-center ${
-              todo.isDone ? 'line-through' : ''
-            }`}
-          >
-            {todo.todo}
+          <div className="d-flex align-items-center">
+            <span className={todo.isDone ? 'line-through' : ''}>
+              {todo.todo}
+            </span>
             <Badge
               className="ml-2"
               color={
