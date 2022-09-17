@@ -6,6 +6,7 @@ import { SingleTodo } from './SingleTodo';
 
 interface TodosProps {
   todos: ITodo[];
+  title: string;
 }
 
 const mapStateToProps = (state: RootState) => {
@@ -15,11 +16,19 @@ const mapStateToProps = (state: RootState) => {
 };
 
 export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
-  const { todos } = props;
+  const { todos, title } = props;
+
+  let currentTodos = [...todos];
+
+  if (!!title) {
+    currentTodos = currentTodos.filter((todo) =>
+      todo.todo.toLowerCase().includes(title.toLowerCase())
+    );
+  }
 
   return (
     <ListGroup>
-      {todos.map((todo) => (
+      {currentTodos.map((todo) => (
         <ListGroupItem key={todo.id}>
           <SingleTodo todo={todo} todos={todos} />
         </ListGroupItem>
