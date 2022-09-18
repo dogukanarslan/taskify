@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import { ITodo } from '../model';
@@ -7,8 +8,6 @@ import { Filters } from './Filters/Filters';
 
 interface TodosProps {
   todos: ITodo[];
-  title: string;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const mapStateToProps = (state: RootState) => {
@@ -18,7 +17,9 @@ const mapStateToProps = (state: RootState) => {
 };
 
 export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
-  const { todos, title, setTitle } = props;
+  const { todos } = props;
+
+  const [title, setTitle] = useState('');
 
   let currentTodos = [...todos];
 

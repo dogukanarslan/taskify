@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'reactstrap';
 import { InputField } from './components/InputField';
@@ -14,14 +13,12 @@ interface AppProps {
 const App = (props: AppProps) => {
   const { toasts } = props;
 
-  const [title, setTitle] = useState('');
-
   return (
     <div className="App">
       <Container>
         <h1 className="text-center">Taskify</h1>
         <InputField />
-        <TodoList title={title} setTitle={setTitle} />
+        <TodoList />
       </Container>
       {toasts.length > 0 && <Toast toasts={toasts} />}
     </div>
