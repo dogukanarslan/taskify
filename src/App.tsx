@@ -6,7 +6,6 @@ import { TodoList } from './components/TodoList';
 import { Toast } from './components/Toast';
 import { RootState } from './redux/store';
 import { IToast } from './model';
-import Filters from './components/Filters/Filters';
 
 interface AppProps {
   toasts: IToast[];
@@ -22,8 +21,7 @@ const App = (props: AppProps) => {
       <Container>
         <h1 className="text-center">Taskify</h1>
         <InputField />
-        <Filters title={title} setTitle={setTitle} />
-        <TodoList title={title} />
+        <TodoList title={title} setTitle={setTitle} />
       </Container>
       {toasts.length > 0 && <Toast toasts={toasts} />}
     </div>
