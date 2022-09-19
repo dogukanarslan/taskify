@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import {
+  ButtonGroup,
+  Button,
+  ListGroup,
+  ListGroupItem,
+  Row,
+  Col,
+  FormGroup,
+} from 'reactstrap';
 import { ITodo } from '../model';
 import { RootState } from '../redux/store';
 import { SingleTodo } from './SingleTodo';
@@ -20,6 +28,11 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
   const { todos } = props;
 
   const [title, setTitle] = useState('');
+  const [status, setStatus] = useState('all');
+
+  const handleClick = (status: string) => {
+    setStatus(status);
+  };
 
   let currentTodos = [...todos];
 
@@ -29,9 +42,39 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
     );
   }
 
+  if (status === 'completed') {
+    currentTodos = currentTodos.filter((todo) => todo.isDone);
+  }
+
+  if (status === 'uncompleted') {
+    currentTodos = currentTodos.filter((todo) => !todo.isDone);
+  }
+
   return (
     <>
-      {todos.length > 0 && <Filters title={title} setTitle={setTitle} />}
+      {todos.length > 0 && (
+        <Row className="align-items-end">
+          <Col xs={{size: 4}}>
+            <ButtonGroup className="mb-3">
+              <Button color="primary" onClick={() => handleClick('all')}>
+                All
+              </Button>
+              <Button color="primary" onClick={() => handleClick('completed')}>
+                Completed
+              </Button>
+              <Button
+                color="primary"
+                onClick={() => handleClick('uncompleted')}
+              >
+                Uncompleted
+              </Button>
+            </ButtonGroup>
+          </Col>
+          <Col xs={{size: 4, offset: 4 }}>
+            <Filters title={title} setTitle={setTitle} />
+          </Col>
+        </Row>
+      )}
       <ListGroup>
         {currentTodos.map((todo) => (
           <ListGroupItem key={todo.id}>

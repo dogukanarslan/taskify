@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup, Label, Input, Row, Col } from 'reactstrap';
+import { FormGroup, Label, Input } from 'reactstrap';
 
 interface FiltersProps {
   title: string;
@@ -14,18 +14,14 @@ export const Filters = (props: FiltersProps) => {
   };
 
   return (
-    <Row>
-      <Col xs={{ size: 4, offset: 8 }}>
-        <FormGroup>
-          <Label>Search Task</Label>
-          <Input
-            type="text"
-            value={title}
-            placeholder="Enter a task"
-            onChange={handleSearch}
-          />
-        </FormGroup>
-      </Col>
-    </Row>
+    <FormGroup>
+      <Label>Search Task</Label>
+      <Input
+        type="text"
+        value={title}
+        placeholder="Enter a task"
+        onChange={handleSearch}
+      />
+    </FormGroup>
   );
 };
