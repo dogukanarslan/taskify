@@ -1,7 +1,7 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Col, Row } from 'reactstrap';
 import { addToast } from '../redux/slices/toastsSlice';
 import { addTodo } from '../redux/slices/todosSlice';
 
@@ -62,30 +62,40 @@ export const InputField = connect()((props: InputFieldProps) => {
 
   return (
     <Form className="mb-4" onSubmit={handleAdd}>
-      <FormGroup>
-        <Label>Task Name</Label>
-        <Input
-          type="text"
-          value={todo}
-          placeholder="Enter a task"
-          onChange={handleChangeTodo}
-        />
-        {errors.todo && <p className="text-danger">{errors.todo}</p>}
-      </FormGroup>
-
-      <FormGroup>
-        <Label>Priority</Label>
-        <Input type="select" value={priority} onChange={handleChangePriority}>
-          <option disabled value="">
-            Select Priority
-          </option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </Input>
-        {errors.priority && <p className="text-danger">{errors.priority}</p>}
-      </FormGroup>
-
+      <Row form>
+        <Col md="6">
+          <FormGroup>
+            <Label>Task Name</Label>
+            <Input
+              type="text"
+              value={todo}
+              placeholder="Enter a task"
+              onChange={handleChangeTodo}
+            />
+            {errors.todo && <p className="text-danger">{errors.todo}</p>}
+          </FormGroup>
+        </Col>
+        <Col md="6">
+          <FormGroup>
+            <Label>Priority</Label>
+            <Input
+              type="select"
+              value={priority}
+              onChange={handleChangePriority}
+            >
+              <option disabled value="">
+                Select Priority
+              </option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </Input>
+            {errors.priority && (
+              <p className="text-danger">{errors.priority}</p>
+            )}
+          </FormGroup>
+        </Col>
+      </Row>
       <Button color="primary" type="submit">
         Add
       </Button>
