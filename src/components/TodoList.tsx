@@ -7,7 +7,6 @@ import {
   ListGroupItem,
   Row,
   Col,
-  FormGroup,
 } from 'reactstrap';
 import { ITodo } from '../model';
 import { RootState } from '../redux/store';
@@ -54,7 +53,7 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
     <>
       {todos.length > 0 && (
         <Row className="align-items-end">
-          <Col xs={{size: 4}}>
+          <Col xs={{ size: 4 }}>
             <ButtonGroup className="mb-3">
               <Button color="primary" onClick={() => handleClick('all')}>
                 All
@@ -70,10 +69,15 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
               </Button>
             </ButtonGroup>
           </Col>
-          <Col xs={{size: 4, offset: 4 }}>
+          <Col xs={{ size: 4, offset: 4 }}>
             <Filters title={title} setTitle={setTitle} />
           </Col>
         </Row>
+      )}
+      {todos.length > 0 && (
+        <p>
+          Total tasks: <b>{todos.length}</b>
+        </p>
       )}
       <ListGroup>
         {currentTodos.map((todo) => (
