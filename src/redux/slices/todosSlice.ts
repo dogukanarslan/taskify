@@ -18,7 +18,11 @@ const todosSlice = createSlice({
     editTodo: (state, action) => {
       state.todos = state.todos.map((todo) =>
         todo.id === action.payload.id
-          ? { ...todo, todo: action.payload.text }
+          ? {
+              ...todo,
+              todo: action.payload.text,
+              priority: action.payload.priority,
+            }
           : todo
       );
     },
