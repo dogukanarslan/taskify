@@ -3,7 +3,14 @@ import { Badge, Form, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Dispatch } from '@reduxjs/toolkit';
 import { ITodo } from '../model';
-import { FiDelete, FiEdit, FiCheck, FiMinus } from 'react-icons/fi';
+import {
+  FiDelete,
+  FiEdit,
+  FiCheck,
+  FiMinus,
+  FiSave,
+  FiX,
+} from 'react-icons/fi';
 import './TodoList.scss';
 import { deleteTodo, editTodo, toggleDone } from '../redux/slices/todosSlice';
 import { addToast } from '../redux/slices/toastsSlice';
@@ -58,40 +65,54 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
               value={todoText}
               onChange={handleEdit}
             />
-            <div className="d-flex flex-column align-items-center">
-              <Badge
-                className={priority === 'high' ? 'text-muted' : ''}
-                href="#"
-                color="danger"
-                onClick={() => setPriority('high')}
-              >
-                High
-              </Badge>
-              {priority === 'high' && <FiMinus />}
+
+            <div className="d-flex">
+              <div className="d-flex flex-column align-items-center">
+                <Badge
+                  className={priority === 'high' ? 'text-muted' : ''}
+                  href="#"
+                  color="danger"
+                  onClick={() => setPriority('high')}
+                >
+                  High
+                </Badge>
+                {priority === 'high' && <FiMinus />}
+              </div>
+              <div className="d-flex flex-column align-items-center">
+                <Badge
+                  href="#"
+                  color="warning"
+                  onClick={() => setPriority('medium')}
+                >
+                  Medium
+                </Badge>
+                {priority === 'medium' && <FiMinus />}
+              </div>
+              <div className="d-flex flex-column align-items-center">
+                <Badge
+                  href="#"
+                  color="success"
+                  onClick={() => setPriority('low')}
+                >
+                  Low
+                </Badge>
+                {priority === 'low' && <FiMinus />}
+              </div>
             </div>
-            <div className="d-flex flex-column align-items-center">
-              <Badge
-                href="#"
-                color="warning"
-                onClick={() => setPriority('medium')}
+            <div className="d-flex">
+              <div className="todos__single-todo--icon p-2 mr-1 cursor-pointer">
+                <FiSave />
+              </div>
+              <div
+                className="todos__single-todo--icon p-2 mr-1 cursor-pointer"
+                onClick={() => setEdit(false)}
               >
-                Medium
-              </Badge>
-              {priority === 'medium' && <FiMinus />}
-            </div>
-            <div className="d-flex flex-column align-items-center">
-              <Badge
-                href="#"
-                color="success"
-                onClick={() => setPriority('low')}
-              >
-                Low
-              </Badge>
-              {priority === 'low' && <FiMinus />}
+                <FiX />
+              </div>
             </div>
           </>
         ) : (
-          <div className="d-flex align-items-center">
+          <>
             <span className={todo.isDone ? 'line-through' : ''}>
               {todo.todo}
             </span>
@@ -107,28 +128,28 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
             >
               {todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
             </Badge>
-          </div>
+            <div className="d-flex">
+              <div
+                className="todos__single-todo--icon p-2 mr-1 cursor-pointer"
+                onClick={() => handleDelete(todo.id)}
+              >
+                <FiDelete />
+              </div>
+              <div
+                className="todos__single-todo--icon p-2 mr-1 cursor-pointer"
+                onClick={() => setEdit(!edit)}
+              >
+                <FiEdit />
+              </div>
+              <div
+                className="todos__single-todo--icon p-2 cursor-pointer"
+                onClick={() => handleDone(todo.id)}
+              >
+                <FiCheck />
+              </div>
+            </div>
+          </>
         )}
-        <div className="d-flex">
-          <div
-            className="todos__single-todo--icon p-2 mr-1 cursor-pointer"
-            onClick={() => handleDelete(todo.id)}
-          >
-            <FiDelete />
-          </div>
-          <div
-            className="todos__single-todo--icon p-2 mr-1 cursor-pointer"
-            onClick={() => setEdit(!edit)}
-          >
-            <FiEdit />
-          </div>
-          <div
-            className="todos__single-todo--icon p-2 cursor-pointer"
-            onClick={() => handleDone(todo.id)}
-          >
-            <FiCheck />
-          </div>
-        </div>
       </div>
     </Form>
   );
