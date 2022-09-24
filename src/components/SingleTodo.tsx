@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react';
-import { Badge, Form, Input } from 'reactstrap';
+import { Badge, Button, Form, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { Dispatch } from '@reduxjs/toolkit';
 import { ITodo } from '../model';
@@ -11,7 +11,6 @@ import {
   FiSave,
   FiX,
 } from 'react-icons/fi';
-import './TodoList.scss';
 import { deleteTodo, editTodo, toggleDone } from '../redux/slices/todosSlice';
 import { addToast } from '../redux/slices/toastsSlice';
 
@@ -100,15 +99,12 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
               </div>
             </div>
             <div className="d-flex">
-              <div className="todos__single-todo--icon p-2 mr-1 cursor-pointer">
+              <Button color="link" type="submit">
                 <FiSave />
-              </div>
-              <div
-                className="todos__single-todo--icon p-2 mr-1 cursor-pointer"
-                onClick={() => setEdit(false)}
-              >
+              </Button>
+              <Button color="link" onClick={() => setEdit(false)}>
                 <FiX />
-              </div>
+              </Button>
             </div>
           </>
         ) : (
@@ -129,24 +125,15 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
               {todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
             </Badge>
             <div className="d-flex">
-              <div
-                className="todos__single-todo--icon p-2 mr-1 cursor-pointer"
-                onClick={() => handleDelete(todo.id)}
-              >
+              <Button color="link" onClick={() => handleDelete(todo.id)}>
                 <FiDelete />
-              </div>
-              <div
-                className="todos__single-todo--icon p-2 mr-1 cursor-pointer"
-                onClick={() => setEdit(!edit)}
-              >
+              </Button>
+              <Button color="link" onClick={() => setEdit(!edit)}>
                 <FiEdit />
-              </div>
-              <div
-                className="todos__single-todo--icon p-2 cursor-pointer"
-                onClick={() => handleDone(todo.id)}
-              >
+              </Button>
+              <Button color="link" onClick={() => handleDone(todo.id)}>
                 <FiCheck />
-              </div>
+              </Button>
             </div>
           </>
         )}
