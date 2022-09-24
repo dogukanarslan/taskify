@@ -109,21 +109,23 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
           </>
         ) : (
           <>
-            <span className={todo.isDone ? 'line-through' : ''}>
-              {todo.todo}
-            </span>
-            <Badge
-              className="ml-2"
-              color={
-                todo.priority === 'high'
-                  ? 'danger'
-                  : todo.priority === 'medium'
-                  ? 'warning'
-                  : 'success'
-              }
-            >
-              {todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
-            </Badge>
+            <div>
+              <span className={todo.isDone ? 'line-through' : ''}>
+                {todo.todo}
+              </span>
+              <Badge
+                className="ml-2"
+                color={
+                  todo.priority === 'high'
+                    ? 'danger'
+                    : todo.priority === 'medium'
+                    ? 'warning'
+                    : 'success'
+                }
+              >
+                {todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1)}
+              </Badge>
+            </div>
             <div className="d-flex">
               <Button color="link" onClick={() => handleDelete(todo.id)}>
                 <FiDelete />
