@@ -55,13 +55,22 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
         <Row className="align-items-end">
           <Col xs={{ size: 4 }}>
             <ButtonGroup className="mb-3">
-              <Button color="primary" onClick={() => handleClick('all')}>
+              <Button
+                active={status === 'all'}
+                color="primary"
+                onClick={() => handleClick('all')}
+              >
                 All
               </Button>
-              <Button color="primary" onClick={() => handleClick('completed')}>
+              <Button
+                active={status === 'completed'}
+                color="primary"
+                onClick={() => handleClick('completed')}
+              >
                 Completed
               </Button>
               <Button
+                active={status === 'uncompleted'}
                 color="primary"
                 onClick={() => handleClick('uncompleted')}
               >
