@@ -68,7 +68,6 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
             <div className="d-flex">
               <div className="d-flex flex-column align-items-center">
                 <Badge
-                  className={priority === 'high' ? 'text-muted' : ''}
                   href="#"
                   color="danger"
                   onClick={() => setPriority('high')}
@@ -79,6 +78,7 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
               </div>
               <div className="d-flex flex-column align-items-center">
                 <Badge
+                  className="ml-2"
                   href="#"
                   color="warning"
                   onClick={() => setPriority('medium')}
@@ -89,6 +89,7 @@ export const SingleTodo = connect()((props: SingleTodoProps) => {
               </div>
               <div className="d-flex flex-column align-items-center">
                 <Badge
+                  className="ml-2"
                   href="#"
                   color="success"
                   onClick={() => setPriority('low')}
