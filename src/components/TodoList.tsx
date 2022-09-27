@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {
   ButtonGroup,
   Button,
+  Container,
   ListGroup,
   ListGroupItem,
   Row,
@@ -47,6 +48,14 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
 
   if (status === 'uncompleted') {
     currentTodos = currentTodos.filter((todo) => !todo.isDone);
+  }
+
+  if (currentTodos.length === 0) {
+    return (
+      <Container className="text-center">
+        <h4>There are no tasks yet.</h4>
+      </Container>
+    );
   }
 
   return (
