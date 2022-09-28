@@ -50,14 +50,6 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
     currentTodos = currentTodos.filter((todo) => !todo.isDone);
   }
 
-  if (currentTodos.length === 0) {
-    return (
-      <Container className="text-center">
-        <h4>There are no tasks yet.</h4>
-      </Container>
-    );
-  }
-
   return (
     <>
       {todos.length > 0 && (
@@ -96,6 +88,11 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
         <p>
           Total tasks: <b>{todos.length}</b>
         </p>
+      )}
+      {currentTodos.length === 0 && (
+        <Container className="text-center">
+          <h4>There are no tasks yet.</h4>
+        </Container>
       )}
       <ListGroup>
         {currentTodos.map((todo) => (
