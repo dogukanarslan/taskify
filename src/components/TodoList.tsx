@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import {
   ButtonGroup,
   Button,
@@ -9,20 +9,21 @@ import {
   Row,
   Col,
 } from 'reactstrap';
-import { ITodo } from '../model';
 import { RootState } from '../redux/store';
 import { SingleTodo } from './SingleTodo';
 import { Filters } from './Filters/Filters';
-
-interface TodosProps {
-  todos: ITodo[];
-}
 
 const mapStateToProps = (state: RootState) => {
   const { todos } = state;
 
   return { todos: todos.todos };
 };
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+interface TodosProps extends PropsFromRedux {}
 
 export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
   const { todos } = props;
