@@ -30,6 +30,7 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
 
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('all');
+  const [priority, setPriority] = useState('');
 
   const handleClick = (status: string) => {
     setStatus(status);
@@ -49,6 +50,10 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
 
   if (status === 'uncompleted') {
     currentTodos = currentTodos.filter((todo) => !todo.isDone);
+  }
+
+  if (!!priority) {
+    currentTodos = currentTodos.filter((todo) => todo.priority === priority);
   }
 
   return (
@@ -81,7 +86,12 @@ export const TodoList = connect(mapStateToProps)((props: TodosProps) => {
             </ButtonGroup>
           </Col>
           <Col xs={{ size: 4, offset: 4 }}>
-            <Filters title={title} setTitle={setTitle} />
+            <Filters
+              title={title}
+              setTitle={setTitle}
+              priority={priority}
+              setPriority={setPriority}
+            />
           </Col>
         </Row>
       )}
